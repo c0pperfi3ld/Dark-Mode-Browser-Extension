@@ -4,7 +4,7 @@
 
 Antigravity transforms the web into a highly personalized reading experience. Built with a focus on performance, aesthetics, and granular control, it uses hardware-accelerated CSS variables to invert and adjust colors without the heavy DOM-mutation overhead of traditional dark mode extensions.
 
-![Antigravity UI Preview](https://via.placeholder.com/800x400?text=Antigravity+Dark+Mode+UI) <!-- Replace with actual screenshot -->
+![Antigravity UI Preview](assets/ui_preview.jpg)
 
 ## ✨ Features
 
