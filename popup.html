@@ -1,0 +1,175 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Antigravity Dark Mode</title>
+  <link rel="stylesheet" href="popup.css">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+</head>
+<body>
+  <div class="container">
+    <header>
+      <div class="brand">
+        <h1>Antigravity</h1>
+        <span class="badge">v2</span>
+      </div>
+      <label class="toggle-switch" title="Master power switch">
+        <input type="checkbox" id="globalToggle">
+        <span class="slider round"></span>
+      </label>
+    </header>
+
+    <div class="row-bar">
+      <div class="row-item">
+        <span class="muted">OS Sync</span>
+        <label class="toggle-switch mini" title="Auto-sync with OS dark mode preference">
+          <input type="checkbox" id="autoSyncToggle">
+          <span class="slider round"></span>
+        </label>
+      </div>
+      <div class="row-item">
+        <span class="muted">Mode</span>
+        <select id="modeSelect" title="Global mode for new sites">
+          <option value="blacklist">Blacklist</option>
+          <option value="whitelist">Whitelist</option>
+        </select>
+      </div>
+    </div>
+
+    <div class="site-bar">
+      <span id="currentSite" class="site-label">example.com</span>
+      <div class="site-actions">
+        <button id="siteThemeBtn" class="icon-btn" title="Toggle Dark/Light mode for this site">🌙</button>
+        <button id="ignoreImagesBtn" class="icon-btn active" title="Images preserved from dark mode">🖼️</button>
+        <label class="toggle-switch mini" title="Enable/disable for this site">
+          <input type="checkbox" id="siteToggle">
+          <span class="slider round"></span>
+        </label>
+      </div>
+    </div>
+
+    <div class="preset-bar">
+      <select id="presetSelect" title="Apply a preset">
+        <option value="">— Preset —</option>
+        <optgroup label="Built-in">
+          <option value="default">Default</option>
+          <option value="nightOwl">Night Owl</option>
+          <option value="reading">Reading</option>
+          <option value="lowBlue">Low Blue</option>
+          <option value="highContrast">Hi-Contrast</option>
+          <option value="cinema">Cinema</option>
+        </optgroup>
+      </select>
+      <button id="savePresetBtn" class="icon-btn" title="Save current sliders as a custom preset">💾</button>
+    </div>
+
+    <div class="filters">
+      <div class="section-divider"><span>Core</span></div>
+      <div class="f-row">
+        <label>Brightness</label>
+        <input type="range" id="brightness" min="20" max="200" value="100">
+        <span class="f-val" id="brightnessVal">100%</span>
+        <span class="f-rst" data-target="brightness" title="Reset">↺</span>
+      </div>
+      <div class="f-row">
+        <label>Contrast</label>
+        <input type="range" id="contrast" min="20" max="200" value="100">
+        <span class="f-val" id="contrastVal">100%</span>
+        <span class="f-rst" data-target="contrast" title="Reset">↺</span>
+      </div>
+      <div class="f-row">
+        <label>Grayscale</label>
+        <input type="range" id="grayscale" min="0" max="100" value="0">
+        <span class="f-val" id="grayscaleVal">0%</span>
+        <span class="f-rst" data-target="grayscale" title="Reset">↺</span>
+      </div>
+      <div class="f-row">
+        <label>Sepia</label>
+        <input type="range" id="sepia" min="0" max="100" value="0">
+        <span class="f-val" id="sepiaVal">0%</span>
+        <span class="f-rst" data-target="sepia" title="Reset">↺</span>
+      </div>
+
+      <div class="section-divider"><span>Color Engine</span></div>
+      <div class="f-row" id="invertGroup">
+        <label>Invert</label>
+        <input type="range" id="invert" min="0" max="100" value="100">
+        <span class="f-val" id="invertVal">100%</span>
+        <span class="f-rst" data-target="invert" title="Reset">↺</span>
+      </div>
+      <div class="f-row" id="hueGroup">
+        <label>Hue Rotate</label>
+        <input type="range" id="hueRotate" min="0" max="360" value="180">
+        <span class="f-val" id="hueRotateVal">180°</span>
+        <span class="f-rst" data-target="hueRotate" title="Reset">↺</span>
+      </div>
+      <div class="f-row">
+        <label>Saturation</label>
+        <input type="range" id="saturate" min="0" max="300" value="100">
+        <span class="f-val" id="saturateVal">100%</span>
+        <span class="f-rst" data-target="saturate" title="Reset">↺</span>
+      </div>
+      <div class="f-row">
+        <label>Color Temp</label>
+        <input type="range" id="colorTemp" min="2700" max="6500" value="6500" step="100">
+        <span class="f-val" id="colorTempVal">6500K</span>
+        <span class="f-rst" data-target="colorTemp" title="Reset">↺</span>
+      </div>
+
+      <div class="section-divider"><span>Comfort</span></div>
+      <div class="f-row">
+        <label>Blue Light</label>
+        <input type="range" id="blueLight" min="0" max="100" value="0">
+        <span class="f-val" id="blueLightVal">0%</span>
+        <span class="f-rst" data-target="blueLight" title="Reset">↺</span>
+      </div>
+      <div class="f-row">
+        <label>Focus Blur</label>
+        <input type="range" id="blur" min="0" max="10" value="0">
+        <span class="f-val" id="blurVal">0px</span>
+        <span class="f-rst" data-target="blur" title="Reset">↺</span>
+      </div>
+      <div class="f-row">
+        <label>Opacity</label>
+        <input type="range" id="opacity" min="50" max="100" value="100">
+        <span class="f-val" id="opacityVal">100%</span>
+        <span class="f-rst" data-target="opacity" title="Reset">↺</span>
+      </div>
+      <div class="f-row">
+        <label>BG Dimmer</label>
+        <input type="range" id="bgDim" min="0" max="100" value="0">
+        <span class="f-val" id="bgDimVal">0%</span>
+        <span class="f-rst" data-target="bgDim" title="Reset">↺</span>
+      </div>
+
+      <div class="section-divider"><span>Readability</span></div>
+      <div class="f-row">
+        <label>Text Boost</label>
+        <input type="range" id="textBoost" min="0" max="3" value="0">
+        <span class="f-val" id="textBoostVal">Off</span>
+        <span class="f-rst" data-target="textBoost" title="Reset">↺</span>
+      </div>
+      <div class="f-row">
+        <label>Image Dim</label>
+        <input type="range" id="imageDim" min="0" max="100" value="0">
+        <span class="f-val" id="imageDimVal">0%</span>
+        <span class="f-rst" data-target="imageDim" title="Reset">↺</span>
+      </div>
+    </div>
+
+    <div id="cssPanel" class="css-panel hidden">
+      <textarea id="customCssInput" placeholder="/* Custom CSS for this site */" rows="3" spellcheck="false"></textarea>
+    </div>
+
+    <footer>
+      <button id="cssBtn" class="foot-btn" title="Toggle custom CSS editor for this site">CSS</button>
+      <button id="exportBtn" class="foot-btn" title="Export all settings to JSON">Export</button>
+      <button id="importBtn" class="foot-btn" title="Import settings from JSON file">Import</button>
+      <button id="resetBtn" class="foot-btn danger" title="Reset all settings for this site">Reset</button>
+      <input type="file" id="importFile" accept=".json" style="display:none">
+    </footer>
+  </div>
+  <script src="popup.js"></script>
+</body>
+</html>
